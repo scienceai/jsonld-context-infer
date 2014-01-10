@@ -20,7 +20,6 @@ From a readable stream in object mode emitting for instance:
 
     { a: 1, b: 2.3 }
     { a: 2, b: 3.6 }
-    { a: 4, b: 3.8 }
 
 The script
 
