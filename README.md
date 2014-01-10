@@ -1,7 +1,9 @@
 jsonld-context-infer
 ====================
 
-Infer a JSON-LD @context from a readable stream operating in object mode.
+Infer a [JSON-LD](http://json-ld.org/)
+[@context](http://json-ld.org/spec/latest/json-ld/#the-context) from a
+readable stream operating in object mode.
 
 [![NPM](https://nodei.co/npm/jsonld-context-infer.png)](https://nodei.co/npm/jsonld-context-infer/)
 
@@ -11,7 +13,7 @@ Infer a JSON-LD @context from a readable stream operating in object mode.
 - Number: a number including floating point numbers -> [xsd:double](http://www.w3.org/TR/xmlschema-2/#double)
 - integer -> [xsd:integer](http://www.w3.org/TR/xmlschema-2/#integer)
 - date (in ISO6801 format YYYY-MM-DD) -> [xsd:date](http://www.w3.org/TR/xmlschema-2/#date)
-- dateTime (in ISO8601 format of YYYY-MM-DDThh:mm:ssZ in UTC time) -> [xsd:dateTime](http://www.w3.org/TR/xmlschema-2/#dateTime)
+- dateTime (in ISO8601 format of YYYY-MM-DDThh:mm:ssZ) -> [xsd:dateTime](http://www.w3.org/TR/xmlschema-2/#dateTime)
 - Boolean: -> [xsd:boolean](http://www.w3.org/TR/xmlschema-2/#boolean)
 
 #Usage
@@ -26,7 +28,7 @@ The script
     var jsonLdContextInfer = require('jsonldContextInfer);
     
     jsonLdContextInfer(s, function(err, schema, scores){
-       console.log(schema, score);
+       console.log(schema, scores);
     });
 
 will outputs:
@@ -41,7 +43,7 @@ schema:
       }
     }
 
-score:
+scores:
 
     {
       a: { "xsd:string": 0, "xsd:double": 2, "xsd:integer": 2, "xsd:date": 0, "xsd:dateTime": 0, "xsd:boolean": 1 },
