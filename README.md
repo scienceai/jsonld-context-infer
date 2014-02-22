@@ -25,7 +25,7 @@ From a readable stream in object mode emitting for instance:
 
 The script
 
-    var jsonLdContextInfer = require('jsonldContextInfer);
+    var jsonLdContextInfer = require('jsonld-context-infer');
     
     jsonLdContextInfer(s, function(err, schema, scores){
        console.log(schema, scores);
