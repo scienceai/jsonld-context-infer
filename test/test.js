@@ -54,6 +54,52 @@ describe('jsonld-context-infer', function(){
 
   });
 
+  it('should convert infered context in about when no order is specified', function(done){
+    jsonLdContextInfer(s, function(err, context, scores){
+      if(err) throw err;  
+      var about = jsonLdContextInfer.about(context);
+
+      var expected = [
+        { "name": "a", "valueType": "xsd:date" },
+        { "name": "b", "valueType": "xsd:dateTime" },
+        { "name": "c", "valueType": "xsd:string" },
+        { "name": "d", "valueType": "xsd:integer" },
+        { "name": "e", "valueType": "xsd:double" },
+        { "name": "f", "valueType": "xsd:boolean" }
+      ];
+
+      assert.deepEqual(about.sort(function (a, b) {
+        if (a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
+        return 0;
+      }), expected);
+
+      done();
+    });
+  });
+
+  it('should convert infered context in about when  order is specified', function(done){
+    jsonLdContextInfer(s, function(err, context, scores){
+      if(err) throw err;  
+      var about = jsonLdContextInfer.about(context, ['f', 'a', 'b', 'c', 'd', 'e']);
+
+      var expected = [
+        { "name": "f", "valueType": "xsd:boolean" },
+        { "name": "a", "valueType": "xsd:date" },
+        { "name": "b", "valueType": "xsd:dateTime" },
+        { "name": "c", "valueType": "xsd:string" },
+        { "name": "d", "valueType": "xsd:integer" },
+        { "name": "e", "valueType": "xsd:double" }
+      ];
+
+      assert.deepEqual(about, expected);
+
+      done();
+    });
+  });
+
+
+
   it('should infer the @context using only nSample samples', function(done){
     jsonLdContextInfer(s, {nSample: 2}, function(err, context, scores){
       if(err) throw err;        
