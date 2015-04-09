@@ -14,18 +14,17 @@ function infer(s, opts, callback){
     opts = {};
   }
 
-  if('nSample' in opts){
-    opts.nSample = (opts.nSample > 0) ? opts.nSample: 1;
-  }
+  var nSample = opts.nSample || Infinity;
+  nSample = (nSample > 0) ? nSample: 1;
 
   callback = once(callback);
-  
+
   var cnt = 0
     , scores = {};
 
   s.on('data', function(obj){
 
-    if(cnt === 0){      
+    if(cnt === 0){
       for(var key in obj){
         scores[key] = {
           "xsd:string": 0,
@@ -33,12 +32,12 @@ function infer(s, opts, callback){
           "xsd:integer": 0,
           "xsd:date": 0,
           "xsd:dateTime": 0,
-          "xsd:boolean": 0          
+          "xsd:boolean": 0
         };
       }
-    } 
+    }
 
-    if(!opts.nSample || (cnt < opts.nSample)){
+    if (nSample === Infinity || (cnt < nSample)) {
 
       for(var key in obj){
         var x = obj[key];
@@ -46,7 +45,7 @@ function infer(s, opts, callback){
         if( re.boolean.test(x) ) {
           scores[key]['xsd:boolean']++;
         }
-        
+
         if (re.number.test(x)){
           x = parseFloat(x, 10);
           if (x % 1 === 0) {
@@ -57,14 +56,14 @@ function infer(s, opts, callback){
         } else if (re.date.test(x)){
           scores[key]['xsd:date']++;
         } else if (re.dateTime.test(x)){
-          scores[key]['xsd:dateTime']++;           
+          scores[key]['xsd:dateTime']++;
         } else{
           scores[key]['xsd:string']++;
-        }     
+        }
       }
     }
 
-    if(cnt === opts.nSample){
+    if (cnt === nSample) {
       try{
         s.end();
         s.destroy();
@@ -105,7 +104,7 @@ function infer(s, opts, callback){
 
       callback(null, { '@context': ctx }, scores);
     });
-  
+
 };
 
 infer.about = function(ctx, order){
@@ -126,4 +125,3 @@ infer.about = function(ctx, order){
 
 
 module.exports = infer;
-
