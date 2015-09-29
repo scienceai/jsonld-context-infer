@@ -1,6 +1,6 @@
 {
   "name": "jsonld-context-infer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Infer a JSON-LD @context from a readable stream of tabular data.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/standard-analytics/jsonld-context-infer.git"
+    "url": "git://github.com/scienceai/jsonld-context-infer.git"
   },
   "keywords": [
     "type",
@@ -19,13 +19,13 @@
   "author": "Sebastien Ballesteros",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/standard-analytics/jsonld-context-infer/issues"
+    "url": "https://github.com/scienceai/jsonld-context-infer/issues"
   },
-  "homepage": "https://github.com/standard-analytics/jsonld-context-infer",
+  "homepage": "https://github.com/scienceai/jsonld-context-infer",
   "devDependencies": {
-    "mocha": "^2.2.4"
+    "mocha": "^2.3.3"
   },
   "dependencies": {
-    "once": "^1.3.1"
+    "once": "^1.3.2"
   }
 }

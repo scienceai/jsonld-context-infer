@@ -54,21 +54,21 @@ describe('jsonld-context-infer', function(){
 
   });
 
-  it('should convert infered @context in about when no order is specified', function(done){
+  it('should convert infered @context in columns when no order is specified', function(done){
     jsonLdContextInfer(s, function(err, context, scores){
       if(err) throw err;
-      var about = jsonLdContextInfer.about(context);
+      var columns = jsonLdContextInfer.columns(context);
 
       var expected = [
-        { "name": "a", "valueType": "xsd:date" },
-        { "name": "b", "valueType": "xsd:dateTime" },
-        { "name": "c", "valueType": "xsd:string" },
-        { "name": "d", "valueType": "xsd:integer" },
-        { "name": "e", "valueType": "xsd:double" },
-        { "name": "f", "valueType": "xsd:boolean" }
+        { "name": "a", "datatype": "date" },
+        { "name": "b", "datatype": "dateTime" },
+        { "name": "c", "datatype": "string" },
+        { "name": "d", "datatype": "integer" },
+        { "name": "e", "datatype": "double" },
+        { "name": "f", "datatype": "boolean" }
       ];
 
-      assert.deepEqual(about.sort(function (a, b) {
+      assert.deepEqual(columns.sort(function (a, b) {
         if (a.name > b.name) return 1;
         if (a.name < b.name) return -1;
         return 0;
@@ -78,21 +78,21 @@ describe('jsonld-context-infer', function(){
     });
   });
 
-  it('should convert infered @context in about when order is specified', function(done){
+  it('should convert infered @context in columns when order is specified', function(done){
     jsonLdContextInfer(s, function(err, context, scores){
       if(err) throw err;
-      var about = jsonLdContextInfer.about(context, ['f', 'a', 'b', 'c', 'd', 'e']);
+      var columns = jsonLdContextInfer.columns(context, ['f', 'a', 'b', 'c', 'd', 'e']);
 
       var expected = [
-        { "name": "f", "valueType": "xsd:boolean" },
-        { "name": "a", "valueType": "xsd:date" },
-        { "name": "b", "valueType": "xsd:dateTime" },
-        { "name": "c", "valueType": "xsd:string" },
-        { "name": "d", "valueType": "xsd:integer" },
-        { "name": "e", "valueType": "xsd:double" }
+        { "name": "f", "datatype": "boolean" },
+        { "name": "a", "datatype": "date" },
+        { "name": "b", "datatype": "dateTime" },
+        { "name": "c", "datatype": "string" },
+        { "name": "d", "datatype": "integer" },
+        { "name": "e", "datatype": "double" }
       ];
 
-      assert.deepEqual(about, expected);
+      assert.deepEqual(columns, expected);
 
       done();
     });

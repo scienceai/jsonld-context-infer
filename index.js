@@ -107,20 +107,20 @@ function infer(s, opts, callback){
 
 };
 
-infer.about = function(ctx, order){
+infer.columns = function(ctx, order){
 
   ctx = ctx['@context'] || ctx;
   order = order || Object.keys(ctx);
 
-  var about = [];
+  var columns = [];
   for(var i=0; i< order.length; i++){
     var key = order[i];
-    if(key !== 'xsd'){
-      about.push({name: ctx[key]['@id'].split(':')[1], valueType: ctx[key]['@type']});
+    if (key !== 'xsd'){
+      columns.push({name: ctx[key]['@id'].split(':')[1], datatype: ctx[key]['@type'].replace('xsd:', '')});
     }
   }
 
-  return about;
+  return columns;
 };
 
 
