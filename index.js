@@ -42,23 +42,25 @@ function infer(s, opts, callback){
       for(var key in obj){
         var x = obj[key];
 
-        if( re.boolean.test(x) ) {
-          scores[key]['xsd:boolean']++;
-        }
-
-        if (re.number.test(x)){
-          x = parseFloat(x, 10);
-          if (x % 1 === 0) {
-            scores[key]['xsd:integer']++;
-          } else {
-            scores[key]['xsd:double']++;
+        if (x !== '' && x !== null) {
+          if( re.boolean.test(x) ) {
+            scores[key]['xsd:boolean']++;
           }
-        } else if (re.date.test(x)){
-          scores[key]['xsd:date']++;
-        } else if (re.dateTime.test(x)){
-          scores[key]['xsd:dateTime']++;
-        } else{
-          scores[key]['xsd:string']++;
+
+          if (re.number.test(x)){
+            x = parseFloat(x, 10);
+            if (x % 1 === 0) {
+              scores[key]['xsd:integer']++;
+            } else {
+              scores[key]['xsd:double']++;
+            }
+          } else if (re.date.test(x)){
+            scores[key]['xsd:date']++;
+          } else if (re.dateTime.test(x)){
+            scores[key]['xsd:dateTime']++;
+          } else {
+            scores[key]['xsd:string']++;
+          }
         }
       }
     }

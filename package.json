@@ -1,6 +1,6 @@
 {
   "name": "jsonld-context-infer",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Infer a JSON-LD @context from a readable stream of tabular data.",
   "main": "index.js",
   "scripts": {
